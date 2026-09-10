@@ -1,0 +1,213 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+/*
+  ============================================================================
+  PIXEL GLOBALINFRA — THEME
+  ============================================================================
+  This is the ONLY file in the project that contains colour values.
+  Never write a hex or oklch value inside a component — use the named tokens.
+
+  The palette is taken verbatim from the reference prototype:
+  deep emerald + gold on a cream ground. Values are kept in oklch exactly as
+  the reference defines them, so the colours match precisely rather than
+  approximately.
+  ============================================================================
+*/
+
+@theme inline {
+  /* --- Source palette, exposed as utilities ------------------------------
+     Gives `bg-emerald-deep`, `text-gold`, `bg-cream` etc., matching the
+     names the design uses. */
+  --color-emerald-deep: var(--emerald-deep);
+  --color-emerald-soft: var(--emerald-soft);
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
+  --color-cream: var(--cream);
+  --color-ink: var(--ink);
+
+  /* --- Brand tokens (use these in components) ---------------------------- */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-surface: var(--card);
+  --color-surface-foreground: var(--card-foreground);
+
+  --color-nav: var(--nav);
+  --color-nav-foreground: var(--nav-foreground);
+
+  --color-heading: var(--heading);
+
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+
+  --color-whatsapp: var(--whatsapp);
+  --color-whatsapp-hover: var(--whatsapp-hover);
+  --color-whatsapp-foreground: var(--whatsapp-foreground);
+
+  /* --- shadcn/ui compatibility aliases ----------------------------------- */
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-destructive: var(--destructive);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* --- Typography — Playfair Display headings, Inter body ---------------- */
+  --font-sans: var(--font-body);
+  --font-heading: var(--font-display);
+
+  /* --- Radii — the reference uses a tight 0.25rem corner ----------------- */
+  --radius-sm: calc(var(--radius) * 0.5);
+  --radius-md: calc(var(--radius) * 0.75);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 2);
+  --radius-2xl: calc(var(--radius) * 3);
+}
+
+:root {
+  --radius: 0.25rem;
+
+  /* --- Source palette ---------------------------------------------------- */
+  --emerald-deep: oklch(34% 0.07 165);
+  --emerald-soft: oklch(46% 0.06 165);
+  --gold: oklch(74% 0.1 82);
+  --gold-soft: oklch(86% 0.06 85);
+  --cream: oklch(98.5% 0.015 95);
+  --ink: oklch(18% 0.02 160);
+
+  /* --- Semantic roles ---------------------------------------------------- */
+  --background: var(--cream);
+  --foreground: var(--emerald-deep);
+
+  --card: oklch(100% 0 0);
+  --card-foreground: var(--emerald-deep);
+  --popover: oklch(100% 0 0);
+  --popover-foreground: var(--emerald-deep);
+
+  /* Nav bar and footer sit on deep emerald — this is the colour the
+     reference site reports as its mobile browser chrome. */
+  --nav: var(--emerald-deep);
+  --nav-foreground: var(--cream);
+
+  --heading: var(--emerald-deep);
+
+  --primary: var(--emerald-deep);
+  --primary-hover: var(--emerald-soft);
+  --primary-foreground: var(--cream);
+
+  --secondary: var(--gold);
+  --secondary-foreground: oklch(100% 0 0);
+
+  --muted: oklch(96% 0.01 90);
+  --muted-foreground: oklch(45% 0.02 160);
+
+  --accent: var(--gold);
+  --accent-hover: var(--gold-soft);
+  --accent-foreground: oklch(100% 0 0);
+
+  --destructive: oklch(57.7% 0.245 27.325);
+  --destructive-foreground: oklch(98.4% 0.003 247.858);
+
+  --border: oklch(34% 0.07 165 / 0.12);
+  --input: oklch(34% 0.07 165 / 0.2);
+  --ring: var(--gold);
+
+  /* WhatsApp brand green — identical everywhere, never themed. */
+  --whatsapp: #25d366;
+  --whatsapp-hover: #1fb855;
+  --whatsapp-foreground: #ffffff;
+}
+
+/*
+  Dark variant, carried over from the reference for completeness. The site
+  renders light by default; this only applies if `.dark` is set on <html>.
+*/
+.dark {
+  --background: var(--ink);
+  --foreground: var(--cream);
+
+  --card: oklch(22% 0.03 160);
+  --card-foreground: var(--cream);
+  --popover: oklch(22% 0.03 160);
+  --popover-foreground: var(--cream);
+
+  --nav: oklch(22% 0.03 160);
+  --nav-foreground: var(--cream);
+
+  --heading: var(--cream);
+
+  --primary: var(--gold);
+  --primary-hover: var(--gold-soft);
+  --primary-foreground: var(--ink);
+
+  --secondary: oklch(30% 0.04 160);
+  --secondary-foreground: var(--cream);
+
+  --muted: oklch(26% 0.03 160);
+  --muted-foreground: oklch(70% 0.02 160);
+
+  --accent: var(--gold);
+  --accent-hover: var(--gold-soft);
+  --accent-foreground: var(--ink);
+
+  --destructive: oklch(70.4% 0.191 22.216);
+  --destructive-foreground: var(--cream);
+
+  --border: oklch(100% 0 0 / 0.1);
+  --input: oklch(100% 0 0 / 0.15);
+  --ring: var(--gold);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    /* Keeps content clear of the iOS home indicator behind sticky bars */
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-heading text-heading;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Photography carries the visual weight — never let an image blow out
+     its container on a narrow phone. */
+  img {
+    max-width: 100%;
+  }
+}
+
+@layer utilities {
+  .card-surface {
+    @apply bg-card text-card-foreground border-border rounded-lg border;
+  }
+
+  .container-page {
+    @apply mx-auto w-full max-w-6xl px-5 sm:px-6 lg:px-8;
+  }
+}

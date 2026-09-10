@@ -1,0 +1,212 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+/*
+  ============================================================================
+  PIXEL GLOBAL INFRA — THEME
+  ============================================================================
+  This is the ONLY file in the project that contains colour values.
+  Never write a hex code inside a component — use the named tokens below.
+
+  Two palettes ship side by side so they can be compared on a real phone:
+    · SAND    (default) — navy structure, amber CTA, warm sand page
+    · WALNUT           — dark walnut surfaces, gold CTA
+
+  The active palette is chosen by the `data-palette` attribute on <html>.
+  To lock the site to one palette permanently, see README → "Choosing a palette".
+  ============================================================================
+*/
+
+@theme inline {
+  /* --- Brand tokens (use these) ------------------------------------------ */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-surface: var(--surface);
+  --color-surface-foreground: var(--surface-foreground);
+
+  --color-nav: var(--nav);
+  --color-nav-foreground: var(--nav-foreground);
+
+  --color-heading: var(--heading);
+
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+
+  --color-whatsapp: var(--whatsapp);
+  --color-whatsapp-hover: var(--whatsapp-hover);
+  --color-whatsapp-foreground: var(--whatsapp-foreground);
+
+  /* --- shadcn/ui compatibility aliases ----------------------------------- */
+  --color-card: var(--surface);
+  --color-card-foreground: var(--surface-foreground);
+  --color-popover: var(--surface);
+  --color-popover-foreground: var(--surface-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* --- Typography -------------------------------------------------------- */
+  --font-sans: var(--font-body);
+  --font-heading: var(--font-display);
+
+  /* --- Radii — cards are 12px per the design spec ------------------------ */
+  --radius-sm: calc(var(--radius) * 0.5);
+  --radius-md: calc(var(--radius) * 0.75);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.33);
+  --radius-2xl: calc(var(--radius) * 1.66);
+}
+
+/*
+  --------------------------------------------------------------------------
+  PALETTE A — SAND (default)
+  Navy structure · amber accent · warm sand page · white cards
+  --------------------------------------------------------------------------
+*/
+:root,
+[data-palette="sand"] {
+  --background: #f8f6f2; /* warm sand — page background */
+  --foreground: #1a1a18; /* text primary */
+
+  --surface: #ffffff; /* cards sit white on sand */
+  --surface-foreground: #1a1a18;
+
+  --nav: #14213d; /* deep navy — nav bar + footer */
+  --nav-foreground: #f8f6f2;
+
+  --heading: #14213d; /* deep navy headings */
+
+  --primary: #14213d;
+  --primary-hover: #22345c;
+  --primary-foreground: #ffffff;
+
+  --accent: #e5a823; /* warm amber — main CTA + status badges ONLY */
+  --accent-hover: #d2971a;
+  --accent-foreground: #1a1a18; /* never white on amber — fails contrast */
+
+  --muted-foreground: #5f5e5a; /* text secondary — 6.0:1 on sand, passes AA */
+  --border: #e3dfd8; /* hairline borders, 1px max */
+
+  --secondary: #eeeae3;
+  --secondary-foreground: #14213d;
+  --muted: #efece6;
+  --input: #e3dfd8;
+  --ring: #14213d;
+  --destructive: #b3261e;
+
+  --radius: 0.75rem; /* 12px */
+}
+
+/*
+  --------------------------------------------------------------------------
+  PALETTE B — WALNUT
+  Dark walnut surfaces · gold accent · cream type
+  --------------------------------------------------------------------------
+*/
+[data-palette="walnut"] {
+  --background: #1a1512;
+  --foreground: #f0eae1;
+
+  --surface: #241d18;
+  --surface-foreground: #f0eae1;
+
+  --nav: #120e0c;
+  --nav-foreground: #f0eae1;
+
+  --heading: #f5efe6;
+
+  --primary: #f0eae1; /* cream button on dark ground */
+  --primary-hover: #ffffff;
+  --primary-foreground: #1a1512;
+
+  --accent: #c9a227; /* muted gold */
+  --accent-hover: #ddb53a;
+  --accent-foreground: #1a1512;
+
+  --muted-foreground: #a99b8a; /* 6.1:1 on surface, passes AA */
+  --border: #3a302a;
+
+  --secondary: #2f2721;
+  --secondary-foreground: #f0eae1;
+  --muted: #2a231e;
+  --input: #3a302a;
+  --ring: #c9a227;
+  --destructive: #e5695f;
+
+  --radius: 0.75rem;
+}
+
+/*
+  --------------------------------------------------------------------------
+  WHATSAPP — brand green, identical in both palettes.
+
+  NOTE ON CONTRAST: white on #25d366 measures 1.98:1, which does not meet
+  WCAG AA. This is WhatsApp's own official button treatment and is used here
+  for instant recognisability. If accessibility compliance is required,
+  change --whatsapp to #12804a below — white then measures 4.98:1 and the
+  button still reads unmistakably as WhatsApp.
+  --------------------------------------------------------------------------
+*/
+:root,
+[data-palette="sand"],
+[data-palette="walnut"] {
+  --whatsapp: #25d366;
+  --whatsapp-hover: #1fb855;
+  --whatsapp-foreground: #ffffff;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    /* Keeps content clear of the iOS home indicator behind sticky bars */
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-heading text-heading;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Photography carries the visual weight — never let an image blow out
+     its container on a narrow phone. */
+  img {
+    max-width: 100%;
+  }
+}
+
+@layer utilities {
+  /* Cards: white surface, 1px hairline border, 12px radius, NO drop shadow.
+     Depth comes from the border against the sand background. */
+  .card-surface {
+    @apply bg-surface text-surface-foreground border border-border rounded-lg;
+  }
+
+  .container-page {
+    @apply mx-auto w-full max-w-6xl px-5 sm:px-6 lg:px-8;
+  }
+}
