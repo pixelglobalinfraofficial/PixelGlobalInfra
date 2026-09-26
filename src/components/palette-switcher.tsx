@@ -44,7 +44,7 @@ export function PaletteSwitcher() {
     <button
       type="button"
       onClick={toggle}
-      className="border-border bg-surface text-surface-foreground fixed right-4 bottom-4 z-50 rounded-full border px-4 py-2 text-xs font-medium shadow-sm"
+      className="border-border bg-surface text-surface-foreground fixed bottom-4 left-4 z-50 rounded-full border px-4 py-2 text-xs font-medium shadow-sm"
     >
       {palette === "sand" ? "Sand" : "Walnut"} palette
     </button>

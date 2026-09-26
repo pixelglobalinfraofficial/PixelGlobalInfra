@@ -3,9 +3,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { ProjectGallery } from "@/components/project-gallery";
 import { ProjectInquiryForm } from "@/components/project-inquiry-form";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { WhatsAppMessageOverride } from "@/components/whatsapp-context";
+import { PROJECT_STATUSES } from "@/config/site";
 import { formatPriceBand } from "@/lib/price";
 import { getProjectBySlug, getProjects } from "@/lib/projects";
 import { buildWhatsAppUrl, projectWhatsAppMessage } from "@/lib/whatsapp";
@@ -47,6 +50,9 @@ export default async function ProjectPage({
   if (!project) notFound();
 
   const cover = project.images.find((i) => i.is_cover) ?? project.images[0];
+  const galleryImages = cover
+    ? [cover, ...project.images.filter((i) => i.id !== cover.id)]
+    : project.images;
   const sourcePage = `/projects/${project.slug}`;
   const whatsappMessage = projectWhatsAppMessage(project.name, project.locality);
 
@@ -64,30 +70,26 @@ export default async function ProjectPage({
 
   return (
     <>
+      <WhatsAppMessageOverride message={whatsappMessage} />
       <SiteHeader />
 
       <main className="flex-1">
         {/* ================= HERO ================= */}
         <section className="relative">
-          {cover ? (
-            <Image
-              src={cover.image_url}
-              alt={cover.alt_text}
-              width={1920}
-              height={1280}
-              priority
-              sizes="100vw"
-              className="h-[70vh] min-h-[500px] w-full object-cover"
-            />
-          ) : null}
-          <div className="from-emerald-deep/80 via-emerald-deep/10 absolute inset-0 bg-gradient-to-t to-transparent" />
-          <div className="text-cream absolute inset-x-0 bottom-0 px-6 pb-12 lg:px-12 lg:pb-16">
+          <ProjectGallery images={galleryImages} />
+          <div className="from-emerald-deep/80 via-emerald-deep/10 pointer-events-none absolute inset-0 bg-gradient-to-t to-transparent" />
+          <div className="text-cream pointer-events-none absolute inset-x-0 bottom-0 px-6 pb-12 lg:px-12 lg:pb-16">
             <div className="mx-auto max-w-7xl">
               <p className="text-gold mb-3 text-[10px] font-bold tracking-[0.3em] uppercase">
                 {project.locality}
               </p>
               <h1 className="font-heading text-cream text-4xl md:text-6xl">
                 {project.name}
+                {PROJECT_STATUSES[project.status].showBadge && (
+                  <span className="bg-black/50 text-cream ml-4 align-middle text-xs font-bold tracking-[0.25em] uppercase px-3 py-1">
+                    {PROJECT_STATUSES[project.status].label}
+                  </span>
+                )}
               </h1>
               <p className="text-cream/80 mt-3 max-w-2xl">{project.tagline}</p>
             </div>

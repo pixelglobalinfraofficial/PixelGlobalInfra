@@ -73,7 +73,15 @@ export type Database = {
         Row: ProjectImage;
         Insert: Partial<ProjectImage> & Pick<ProjectImage, "project_id" | "image_url">;
         Update: Partial<ProjectImage>;
-        Relationships: [];
+        Relationships: [
+          {
+            foreignKeyName: "project_images_project_id_fkey";
+            columns: ["project_id"];
+            isOneToOne: false;
+            referencedRelation: "projects";
+            referencedColumns: ["id"];
+          },
+        ];
       };
       enquiries: {
         Row: Enquiry;

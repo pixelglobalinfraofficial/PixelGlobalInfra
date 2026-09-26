@@ -1,6 +1,6 @@
 import { getSampleProject, sampleProjects, type SampleProject } from "@/lib/sample-projects";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
-import { createClient } from "@/lib/supabase/server";
+import { createPublicClient } from "@/lib/supabase/public";
 import type { Project, ProjectImage } from "@/lib/supabase/types";
 
 const PROJECT_SELECT = "*, project_images(*)";
@@ -20,11 +20,10 @@ function toSampleShape(row: ProjectRow): SampleProject {
 export async function getProjects(): Promise<SampleProject[]> {
   if (!isSupabaseConfigured) return sampleProjects;
 
-  const supabase = await createClient();
+  const supabase = createPublicClient();
   const { data, error } = await supabase
     .from("projects")
     .select(PROJECT_SELECT)
-    .eq("status", "active")
     .order("sort_order", { ascending: true });
 
   if (error || !data) {
@@ -46,7 +45,7 @@ export async function getProjectBySlug(
 ): Promise<SampleProject | undefined> {
   if (!isSupabaseConfigured) return getSampleProject(slug);
 
-  const supabase = await createClient();
+  const supabase = createPublicClient();
   const { data, error } = await supabase
     .from("projects")
     .select(PROJECT_SELECT)

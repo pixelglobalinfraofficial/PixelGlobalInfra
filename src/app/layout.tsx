@@ -2,6 +2,9 @@ import type { Metadata, Viewport } from "next";
 import { Fraunces, Inter } from "next/font/google";
 
 import { PaletteScript, PaletteSwitcher } from "@/components/palette-switcher";
+import { Toaster } from "@/components/ui/sonner";
+import { WhatsAppFab } from "@/components/whatsapp-fab";
+import { WhatsAppMessageProvider } from "@/components/whatsapp-context";
 import { siteConfig } from "@/config/site";
 
 import "./globals.css";
@@ -58,8 +61,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <PaletteScript />
       </head>
       <body className="flex min-h-full flex-col">
-        {children}
-        <PaletteSwitcher />
+        <WhatsAppMessageProvider>
+          {children}
+          <WhatsAppFab />
+          <PaletteSwitcher />
+        </WhatsAppMessageProvider>
+        <Toaster />
       </body>
     </html>
   );

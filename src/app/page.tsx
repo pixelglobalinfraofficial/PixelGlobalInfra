@@ -71,7 +71,7 @@ const SERVICES = [
 ];
 
 export default async function HomePage() {
-  const featuredProjects = await getFeaturedProjects();
+  const featuredProjects = await getFeaturedProjects(4);
 
   return (
     <>
@@ -147,7 +147,7 @@ export default async function HomePage() {
         </section>
 
         {/* ================= PREMIER RESIDENCES ================= */}
-        <section className="mx-auto max-w-[1850px] px-6 py-24 lg:px-12 lg:py-32">
+        <section className="mx-auto max-w-7xl px-6 py-24 lg:px-12 lg:py-32">
           <div className="mb-16 flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
             <div>
               <p className="text-gold mb-4 text-[10px] font-bold tracking-[0.3em] uppercase">
@@ -165,7 +165,7 @@ export default async function HomePage() {
             </Link>
           </div>
 
-          <div className="grid gap-x-10 gap-y-16 md:grid-cols-3 lg:gap-x-16">
+          <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-3">
             {featuredProjects.map((project, i) => (
               <ProjectCard
                 key={project.slug}

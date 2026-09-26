@@ -1,13 +1,9 @@
 import type { Project, ProjectImage } from "@/lib/supabase/types";
 
 /**
- * Projects mirroring the reference prototype, so the rebuilt UI can be
- * compared against it directly.
- *
- * These are placeholder listings, not real inventory. They get replaced by
- * real projects entered through /admin once the admin panel exists.
- * See docs/reference-site-audit.md items 1 and 15 for the price-display and
- * positioning changes still owed on this content.
+ * Fallback content shown only when Supabase isn't configured yet, or a query
+ * fails — see src/lib/projects.ts. Once the `projects` table has rows, those
+ * are what the site actually renders.
  */
 export type SampleProject = Project & {
   images: ProjectImage[];
@@ -29,138 +25,54 @@ function cover(project_id: string, image_url: string, alt_text: string): Project
 
 export const sampleProjects: SampleProject[] = [
   {
-    id: "sample-1",
-    slug: "oberoi-skyline-penthouse",
-    name: "The Oberoi Skyline Penthouse",
-    tagline: "Duplex penthouse with panoramic Gomti views",
-    display_type: "Penthouse",
+    id: "sample-4",
+    slug: "ekana-mall",
+    name: "Ekana Mall",
+    tagline: "A bouquet of leisure and retail experiences at Ekana Sportz City",
+    display_type: "Retail Mall",
     description:
-      "<p>A two-level penthouse on the 28th floor of Gomti Nagar's most distinguished tower. Floor-to-ceiling glass, imported Italian marble, a private rooftop garden and dedicated concierge define a residence reserved for the few.</p>",
-    locality: "Gomti Nagar, Lucknow",
-    property_type: "Apartment",
-    configurations: "4 BHK",
-    area_range: "4,200 sqft",
-    possession_status: "Ready to move",
+      "<p>Lucknow's flagship shopping and entertainment destination at Ekana Sportz City — a 137-acre, state-government-backed development anchored by the Ekana International Cricket Stadium. The mall spans hyper retail and anchor stores, a multiplex cinema, gaming arcade, a Venetian-style indoor gondola ride, a gold souk, food court, rooftop resto-bar and multiple floors of Grade-A commercial office space.</p>",
+    locality: "Gomti Nagar Extension, Lucknow",
+    property_type: "Commercial",
+    configurations: "Retail, F&B, Office & Anchor Spaces",
+    area_range: "472 – 7,150 sqft (per unit)",
+    possession_status: "",
     possession_date: null,
-    builder_name: "Sample Developer Pvt Ltd",
-    rera_number: "UPRERAPRJ000000",
-    price_band: "₹12.5 Cr",
+    builder_name: "Ekana Sportz City Pvt. Ltd.",
+    rera_number: "UPRERAPRJ407529",
+    price_band: null,
     map_embed_url:
-      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1780!2d81.0!3d26.85!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1",
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1780!2d80.99!3d26.83!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1",
     status: "active",
     sort_order: 1,
     created_at: now,
     updated_at: now,
-    card_badge: "Featured",
-    amenities: [
-      "Private rooftop garden",
-      "Italian marble flooring",
-      "Smart home automation",
-      "Two reserved car parks",
-      "24x7 concierge",
-      "Infinity-edge pool access",
-      "Private elevator lobby",
-      "Wine cellar",
-    ],
-    landmarks: [
-      { name: "Phoenix Palassio Mall", distance: "1.8 km" },
-      { name: "Lulu Mall", distance: "3.2 km" },
-      { name: "SGPGI Hospital", distance: "6.0 km" },
-      { name: "CCS International Airport", distance: "16 km" },
-    ],
-    images: [],
-  },
-  {
-    id: "sample-2",
-    slug: "hazratganj-heritage-manor",
-    name: "Hazratganj Heritage Manor",
-    tagline: "Restored colonial estate on a half-acre plot",
-    display_type: "Villa",
-    description:
-      "<p>A 1920s manor in Hazratganj combining original architectural features with modern amenities. The restoration preserves arched verandahs, hand-laid tile floors and mature gardens while incorporating contemporary systems including climate control, EV charging and fibre optic connectivity.</p>",
-    locality: "Central Lucknow",
-    property_type: "Villa",
-    configurations: "5 BHK",
-    area_range: "6,800 sqft",
-    possession_status: "Ready to move",
-    possession_date: null,
-    builder_name: "Sample Developer Pvt Ltd",
-    rera_number: "UPRERAPRJ000001",
-    price_band: "₹8.2 Cr",
-    map_embed_url:
-      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1780!2d80.94!3d26.85!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1",
-    status: "active",
-    sort_order: 2,
-    created_at: now,
-    updated_at: now,
-    card_badge: null,
-    amenities: [
-      "Half-acre landscaped grounds",
-      "Restored arched verandahs",
-      "Staff quarters",
-      "EV charging",
-      "Private library",
-      "Wine cellar",
-      "Outdoor entertaining lawn",
-    ],
-    landmarks: [
-      { name: "Hazratganj Market", distance: "0.4 km" },
-      { name: "La Martinière College", distance: "1.2 km" },
-      { name: "Vidhan Sabha", distance: "1.7 km" },
-      { name: "Charbagh Railway", distance: "4.5 km" },
-    ],
-    images: [],
-  },
-  {
-    id: "sample-3",
-    slug: "aura-business-district",
-    name: "Aura Business District",
-    tagline: "Grade-A commercial suites in Sushant Golf City",
-    display_type: "Commercial Suite",
-    description:
-      "<p>A landmark Grade-A development with column-free floor plates, double-glazed curtain walls and LEED Gold certification.</p>",
-    locality: "Sushant Golf City",
-    property_type: "Commercial",
-    configurations: "",
-    area_range: "1,850 sqft",
-    possession_status: "",
-    possession_date: null,
-    builder_name: "Sample Developer Pvt Ltd",
-    rera_number: null,
-    price_band: "From ₹4.5 Cr",
-    map_embed_url:
-      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1780!2d80.98!3d26.83!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1",
-    status: "active",
-    sort_order: 3,
-    created_at: now,
-    updated_at: now,
     card_badge: "Commercial",
     amenities: [
-      "LEED Gold certified",
-      "Column-free floor plates",
-      "Double-glazed curtain walls",
-      "1:80 sqft parking ratio",
-      "Sky lobby & conference facilities",
-      "Cafeteria & food court",
-      "24x7 manned security",
+      "Multiplex cinema with recliner screens",
+      "Venetian-style indoor gondola ride",
+      "Gold souk",
+      "Gaming arcade & kids' playzone",
+      "Rooftop resto-bar with skyline views",
+      "Food court & opulent diners",
+      "Hyper stores & anchor retail",
+      "Grade-A commercial office floors",
+      "Multi-level secured parking",
     ],
     landmarks: [
-      { name: "Shaheed Path", distance: "0.6 km" },
-      { name: "Ekana Stadium", distance: "2.4 km" },
-      { name: "CCS International Airport", distance: "9 km" },
-      { name: "Lucknow Metro (Munshipulia)", distance: "12 km" },
+      { name: "Ekana International Cricket Stadium", distance: "Adjacent" },
+      { name: "Shaheed Path", distance: "On arterial road" },
+      { name: "Hazratganj", distance: "10 km" },
+      { name: "Charbagh Railway Station", distance: "12 km" },
+      { name: "Amausi International Airport", distance: "15 km" },
     ],
     images: [],
   },
 ];
 
 const coverPhotos: Record<string, string> = {
-  "oberoi-skyline-penthouse":
-    "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1400&q=80",
-  "hazratganj-heritage-manor":
-    "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=1400&q=80",
-  "aura-business-district":
-    "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1400&q=80",
+  "ekana-mall":
+    "https://images.unsplash.com/photo-1519567241046-7f570eee3ce6?w=1400&q=80",
 };
 
 for (const p of sampleProjects) {

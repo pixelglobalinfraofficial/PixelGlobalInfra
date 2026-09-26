@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { PROJECT_STATUSES } from "@/config/site";
 import type { SampleProject } from "@/lib/sample-projects";
 
 /** Builds the "4 BHK · 4,200 sqft" line, skipping whichever part is missing. */
@@ -36,6 +37,11 @@ export function ProjectCard({
         {project.card_badge && (
           <span className="bg-emerald-deep text-cream absolute top-4 left-4 px-3 py-1 text-[9px] font-bold tracking-[0.25em] uppercase italic">
             {project.card_badge}
+          </span>
+        )}
+        {PROJECT_STATUSES[project.status].showBadge && (
+          <span className="bg-black/70 text-cream absolute top-4 right-4 px-3 py-1 text-[9px] font-bold tracking-[0.25em] uppercase">
+            {PROJECT_STATUSES[project.status].label}
           </span>
         )}
       </div>
