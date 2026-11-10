@@ -39,7 +39,11 @@ export const metadata: Metadata = {
     description: siteConfig.description,
   },
   twitter: { card: "summary_large_image" },
-  robots: { index: true, follow: true },
+  // Hidden from search engines unless NEXT_PUBLIC_ALLOW_INDEXING=true is set.
+  robots:
+    process.env.NEXT_PUBLIC_ALLOW_INDEXING === "true"
+      ? { index: true, follow: true }
+      : { index: false, follow: false },
 };
 
 export const viewport: Viewport = {
